@@ -1,0 +1,48 @@
+<div class="flex items-center justify-center min-h-screen flex-col">
+
+  <nz-card class="bg-blue-50 min-w-[40%] mb-4 p-4 border border-blue-500 rounded text-blue-500 max-w-sm mx-auto"
+    nzTitle="Admin Account Information">
+    <p>Currently, full functionality is available only with the admin account. The section for standard role users is
+      still
+      under development; however, due to the approaching deadline, this version is being shared at this time.
+    </p>
+    <p><strong>Email:</strong> admin&#64;gmail.com</p>
+    <p><strong>Password:</strong> 12345</p>
+  </nz-card>
+
+
+  <nz-spin [nzSpinning]="loading" class="w-full">
+    <form [formGroup]="loginForm" (ngSubmit)="login()"
+      class="space-y-4 min-w-[40%] bg-white p-6 rounded-md shadow-md max-w-sm mx-auto">
+      <div>
+        <label class="block text-gray-700">Email:</label>
+        <input formControlName="email" nz-input placeholder="Enter email" class="w-full p-2 border rounded" />
+        <div *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched">
+          <small class="text-red-500">Valid email is required</small>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-gray-700">Password:</label>
+        <input type="password" formControlName="password" nz-input placeholder="Enter password"
+          class="w-full p-2 border rounded" />
+        <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+          <small class="text-red-500">Password is required</small>
+        </div>
+      </div>
+
+      <button nz-button type="submit"
+        class="w-full bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 hover:text-white transition duration-200 ease-in-out transform">
+        Login
+      </button>
+
+
+      <div *ngIf="errorMessage" class="text-red-500">{{ errorMessage }}</div>
+    </form>
+
+    <p class="text-center mt-2 text-white">
+      <button nz-button (click)="goToSignup()" nzType="link" class="text-blue-500 hover:underline">Don't have an
+        account?</button>
+    </p>
+  </nz-spin>
+</div>

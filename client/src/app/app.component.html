@@ -1,0 +1,6 @@
+<div *ngIf="showHeader" class="header flex justify-between items-center w-full bg-white rounded p-2">
+  <img class="w-[50px] h-[50px] cursor-pointer " src="logo.png" alt="logo" [routerLink]="['/users']">
+  <button nz-button nzDanger (click)="logout()">Log Out</button>
+</div>
+
+<router-outlet></router-outlet>

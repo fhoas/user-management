@@ -1,0 +1,41 @@
+<div class="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0 pt-4">
+  <input nz-input placeholder="Filter by name or email" [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()"
+    class="w-full sm:w-1/2 p-2 border rounded shadow-sm" />
+  <button [routerLink]="['/add-new-user']" nz-button nzPrimary
+    class="border border-blue-500 text-blue-500 w-full sm:w-auto">
+    Add New User
+  </button>
+</div>
+
+<div class="pagination-wrapper mt-4">
+  <nz-table #userTable [nzData]="paginatedUsers" [nzTotal]="filteredTotal" [nzPageSize]="pageSize"
+    [nzPageIndex]="pageIndex" [nzLoading]="loading" [nzFrontPagination]="false"
+    (nzQueryParams)="onQueryParamsChange($event)" (nzPageIndexChange)="onPageIndexChange($event)"
+    (nzPageSizeChange)="onPageSizeChange($event)" [nzNoResult]="'No user available'"
+    class="w-full bg-white shadow-md rounded-md min-w-full table-fixed">
+
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="p-2 w-1/2 md:w-1/4 lg:w-1/3 whitespace-normal break-words">Name</th>
+        <th class="p-2 w-1/2 md:w-1/4 lg:w-1/3 whitespace-normal break-words">Email</th>
+        <th class="p-2 w-full md:w-2/4 lg:w-1/3 whitespace-normal break-words">Actions</th> <!-- Actions grows more -->
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let user of paginatedUsers" class="border-t">
+        <td class="p-2 whitespace-normal break-words">{{ user.username }}</td>
+        <td class="p-2 whitespace-normal break-words">{{ user.email }}</td>
+        <!-- Adjust the actions column -->
+        <td class="p-2 space-y-2 sm:space-y-0 sm:space-x-2 sm:flex sm:flex-wrap items-start">
+          <button nz-button nzDefault [routerLink]="['/user/view', user.id]" class="hover:underline">Detail</button>
+          <button nz-button [routerLink]="['/user/edit', user.id]"
+            class="border border-blue-500 text-blue-500">Edit</button>
+          <button nz-button [routerLink]="['/user', user.id, 'posts']"
+            class="border border-green-500 text-green-500 hover:text-green-400 hover:border-green-400">Posts</button>
+          <button nz-button nzDanger (click)="deleteUser(user.id)" class="hover:underline">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

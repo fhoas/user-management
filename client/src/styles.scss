@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  body {
+    background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%);
+    padding: 20px;
+
+    button {
+      border-radius: 5px !important;
+    }
+  }
+  .pagination-wrapper .ant-table-pagination {
+    display: flex;
+    justify-content: center;
+  }
+}

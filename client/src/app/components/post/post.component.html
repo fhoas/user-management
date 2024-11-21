@@ -1,0 +1,38 @@
+<div class="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0 pt-4">
+  <input nz-input placeholder="Filter by title or description" [(ngModel)]="searchTerm"
+    (ngModelChange)="onSearchChange()" class="w-full sm:w-1/2 p-2 border rounded shadow-sm" />
+  <button [routerLink]="['/user', userId, 'new-post']" nz-button nzPrimary
+    class="border border-blue-500 text-blue-500 w-full sm:w-auto">
+    Add New Post
+  </button>
+</div>
+
+<div class="pagination-wrapper mt-4">
+  <nz-table #postTable [nzData]="paginatedPosts" [nzTotal]="filteredTotal" [nzPageSize]="pageSize"
+    [nzPageIndex]="pageIndex" [nzLoading]="loading" [nzFrontPagination]="false"
+    (nzQueryParams)="onQueryParamsChange($event)" (nzPageIndexChange)="onPageIndexChange($event)"
+    (nzPageSizeChange)="onPageSizeChange($event)" [nzNoResult]="'No data available'"
+    class="w-full bg-white shadow-md rounded-md table-fixed">
+
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="p-2 w-full sm:w-1/4 md:w-1/3">Title</th>
+        <th class="p-2 w-full sm:w-1/4 md:w-1/3">Description</th>
+        <th class="p-2 w-full sm:w-2/4 md:w-1/3">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let post of paginatedPosts" class="border-t">
+        <td class="p-2 truncate">{{ post.name }}</td>
+        <td class="p-2 truncate">{{ post.description }}</td>
+        <td class="p-2 space-y-2 sm:space-y-0 sm:space-x-2 sm:flex flex-col sm:flex-row items-start">
+          <button nz-button [routerLink]="['/post/edit', post._id]" class="border border-blue-500 text-blue-500">
+            Edit
+          </button>
+          <button nz-button nzDanger (click)="deletePost(post._id)" class="hover:underline">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

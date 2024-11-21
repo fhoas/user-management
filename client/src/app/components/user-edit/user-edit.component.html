@@ -1,0 +1,42 @@
+<div class="flex items-center justify-center min-h-screen" style="margin-top: -70px;">
+  <nz-spin [nzSpinning]="loading" class="w-full">
+    <form [formGroup]="userForm" (ngSubmit)="saveUser()"
+      class="space-y-4 bg-white p-6 rounded-md shadow-md max-w-sm min-w-[40%] mx-auto">
+
+      <div>
+        <label class="block text-gray-700">Name:</label>
+        <input formControlName="username" nz-input placeholder="Enter user name" class="w-full p-2 border rounded" />
+        <div *ngIf="userForm.controls['username'].invalid && userForm.controls['username'].touched">
+          <small class="text-red-500">Name is required</small>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-gray-700">Email:</label>
+        <input formControlName="email" nz-input placeholder="Enter user email" class="w-full p-2 border rounded" />
+        <div *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched">
+          <small class="text-red-500">Email is required</small>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-gray-700">Password:</label>
+        <input type="password" formControlName="password" nz-input placeholder="Enter new password"
+          class="w-full p-2 border rounded" />
+        <div *ngIf="userForm.controls['password'].invalid && userForm.controls['password'].touched">
+          <small class="text-red-500">Password is required</small>
+        </div>
+      </div>
+
+      <button nz-button type="submit"
+        class="w-full bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 hover:text-white transition duration-200 ease-in-out transform">
+        Save User
+      </button>
+
+      <button nz-button nzType="default" [routerLink]="['/users']"
+        class="w-full bg-gray-500 text-white rounded hover:bg-gray-600 mt-2">
+        Cancel
+      </button>
+    </form>
+  </nz-spin>
+</div>

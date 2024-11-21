@@ -1,0 +1,41 @@
+<div class="flex items-center justify-center min-h-screen">
+  <nz-spin [nzSpinning]="loading" class="w-full">
+    <form [formGroup]="signupForm" (ngSubmit)="signup()"
+      class="space-y-4 bg-white p-6 rounded-md shadow-md max-w-lg mx-auto min-w-[40%]">
+      <div>
+        <label class="block text-gray-700">Username:</label>
+        <input formControlName="username" nz-input placeholder="Enter username" class="w-full p-2 border rounded" />
+        <div *ngIf="signupForm.controls['username'].invalid && signupForm.controls['username'].touched">
+          <small class="text-red-500">Username is required</small>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-gray-700">Email:</label>
+        <input formControlName="email" nz-input placeholder="Enter email" class="w-full p-2 border rounded" />
+        <div *ngIf="signupForm.controls['email'].invalid && signupForm.controls['email'].touched">
+          <small class="text-red-500">Valid email is required</small>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-gray-700">Password:</label>
+        <input type="password" formControlName="password" nz-input placeholder="Enter password"
+          class="w-full p-2 border rounded" />
+        <div *ngIf="signupForm.controls['password'].invalid && signupForm.controls['password'].touched">
+          <small class="text-red-500">Password is required</small>
+        </div>
+      </div>
+
+      <button nz-button type="submit"
+        class="w-full bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 hover:text-white transition duration-200 ease-in-out transform">
+        Sign Up
+      </button>
+    </form>
+    <p class="text-center mt-2 text-white">
+      <button nz-button (click)="goToLogin()" nzType="link" class="text-blue-500 hover:underline">Do you have an
+        account?</button>
+    </p>
+  </nz-spin>
+
+</div>
